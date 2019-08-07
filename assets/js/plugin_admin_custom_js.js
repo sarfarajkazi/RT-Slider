@@ -47,7 +47,7 @@ jQuery(function ($) {
                 title: admin_veriables.select_images,
                 button: {
                     text: admin_veriables.add
-                }, multiple: true
+                }, multiple: false
             });
             mediaUploader.on('select', function () {
                 var attachment = mediaUploader.state().get('selection').length;

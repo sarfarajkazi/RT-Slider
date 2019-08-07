@@ -50,7 +50,7 @@ if (!class_exists('rtslider_shortcode_handler_admin')):
                     'show_ui' => true,
                     'has_archive' => false,
                     'hierarchical' => false,
-                    'supports' => array('title', 'page-attributes', 'editor'),
+                    'supports' => array('title', 'page-attributes', 'editor','thumbnail'),
                 )
             );
 
@@ -110,7 +110,7 @@ if (!class_exists('rtslider_shortcode_handler_admin')):
         {
             $t_id = $tag->term_id; // Get the ID of the term you're editing
             $settings = get_option("taxonomy_term_$t_id");
-            $radio_val_array=array("Yes","No");
+            $radio_val_array=array('1'=>"Yes",'0'=>"No");
             include_once RTSLIDER_ADMIN_TEMPLATES.'sliders_category_custom_fields.php';
         }
 
@@ -129,11 +129,12 @@ if (!class_exists('rtslider_shortcode_handler_admin')):
         }
 
         function add_rts_metabox(){
-            add_meta_box('rts_metabox', __("RT Slider", PLUGIN_DOMAIN), array($this, "display_rts_metabox"), array('rtslides'), 'normal', 'high');
+            add_meta_box('rts_metabox', __("RT slider settings", PLUGIN_DOMAIN), array($this, "display_rts_metabox"), array('rtslides'), 'normal', 'high');
         }
         function display_rts_metabox(){
             global $post;
-            $slider_images = get_post_meta($post->ID,'rt_slider_images',true);
+            $settings = get_post_meta($post->ID,'post_settings',true);
+            $radio_val_array=array('1'=>"Yes",'0'=>"No");
             include_once RTSLIDER_ADMIN_TEMPLATES.'sliders_custom_fields.php';
         }
 
@@ -142,18 +143,16 @@ if (!class_exists('rtslider_shortcode_handler_admin')):
             if ("rtslides" != $post_type) {
                 return;
             }
-            if (!empty($_POST['attachments'])) {
-                $arr = $_POST['attachments'];
-                $slider_images = get_post_meta($post_id,'rt_slider_images',true);
-                if (!is_array($slider_images)) {
-                    $slider_images = array();
+            if ( isset( $_POST['post_meta'] ) ) {
+                $post_keys = array_keys( $_POST['post_meta'] );
+                foreach ( $post_keys as $key ){
+                    if ( isset( $_POST['post_meta'][$key] ) ){
+                        $post_meta[$key] = $_POST['post_meta'][$key];
+                    }
                 }
-                foreach ($arr as $key => $value) {
-                    $counter = count($slider_images);
-                    $slider_images[$value] = $counter;
-                    update_post_meta($post_id,'rt_slider_images', $slider_images);
-                }
+                update_post_meta($post_id,'post_settings',$post_meta);
             }
+
         }
     }
 endif;

@@ -1,4 +1,4 @@
-# RT-Slider
+﻿# RT-Slider
 
 ### Introduction
 
@@ -33,7 +33,7 @@ To install this plugin, you will need to setup wordpress project in your compute
 
 ### Author
 
-**[Sarfaraj Kazi](www.sarfarajkazi.com)** 
+**[Sarfaraj Kazi](http://www.sarfarajkazi.com)** 
 
 > **Social Presence**
 
