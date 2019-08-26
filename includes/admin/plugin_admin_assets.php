@@ -35,6 +35,9 @@ if (!class_exists('rtslider_admin_assets', false)) :
          */
         public function rtslider_admin_scripts()
         {
+            if( get_post_type()=='rtslider'){
+                wp_enqueue_script("jquery-ui-sortable");
+            }
             $jsVersion = filemtime(RTSLIDER_PLUGIN_PATH . 'assets/js/plugin_admin_custom_js.js');
             wp_enqueue_script('rtslider_custom-js-file', RTSLIDER_PLUGIN_URL . 'assets/js/plugin_admin_custom_js.js', array('jquery'), $jsVersion, true);
             $localize_veriable = array('ajax_url' => RTSLIDER_ADMIN_AJAX_URL, 'site_url' => RTSLIDER_SITE_URL, 'select_images' => __("Select Images", PLUGIN_DOMAIN), 'add' => __('Add', PLUGIN_DOMAIN),

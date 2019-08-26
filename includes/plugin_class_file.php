@@ -69,6 +69,7 @@ final class RTSLIDER
     public function __construct()
     {
         $this->rtslider_define_constants();
+        add_action('init',array($this,'rt_post_type'));
         $this->rtslider_includes();
     }
 
@@ -107,6 +108,8 @@ final class RTSLIDER
         $this->rtslider_define('RTSLIDER_ENABLE', 1);
         $this->rtslider_define('RTSLIDER_DISABLE', 0);
         $this->rtslider_define('RTSLIDER_RANDOM_NUMBER', $random_number);
+        $this->rtslider_define('RTSLIDER_POST_TYPE', 'rtslider');
+        $this->rtslider_define('RTSLIDER_CATEGORY', 'slider_category');
         $this->rtslider_define('PLUGIN_DOMAIN', 'rtslider_domain');
     }
 
@@ -151,21 +154,56 @@ final class RTSLIDER
             include_once RTSLIDER_PLUGIN_PATH . 'includes/frontend/plugin_frontend.php';
         }
     }
-    function pr($data = false, $flag = false, $display = false)
-    {
-        if (empty($display)) {
-            echo "<pre class='direct_display'>";
-            if ($flag == 1) {
-                print_r($data);
-                die;
-            } else {
-                print_r($data);
-            }
-            echo "</pre>";
-        } else {
-            echo "<div style='display:none' class='direct_display'><pre>";
-            print_r($data);
-            echo "</pre></div>";
-        }
+
+
+    function rt_custom_post_type(){
+
     }
+    function rt_post_type(){
+        register_post_type('rtslider',
+            array(
+                'labels' => array(
+                    'name' => __('RT Slider', PLUGIN_DOMAIN),
+                    'menu_name' => __('RT Slider', PLUGIN_DOMAIN),
+                    'all_items' => __('Slides', PLUGIN_DOMAIN),
+                    'add_new' => __('Add New Slide', PLUGIN_DOMAIN),
+                    'singular_name' => __('Slide', PLUGIN_DOMAIN),
+                    'add_item' => __('New Slide', PLUGIN_DOMAIN),
+                    'add_new_item' => __('Add New Slide', PLUGIN_DOMAIN),
+                    'edit_item' => __('Edit Slide', PLUGIN_DOMAIN)
+                ),
+                'public' => false,
+                'show_in_menu' => true,
+                'menu_position' => 4,
+                'show_ui' => true,
+                'has_archive' => false,
+                'hierarchical' => false,
+                'supports' => array('title', 'page-attributes', 'editor', 'thumbnail'),
+            )
+        );
+
+        $labels = array(
+            'name' => __('Sliders', PLUGIN_DOMAIN),
+            'singular_name' => __('Slider', PLUGIN_DOMAIN),
+            'search_items' => __('Search Sliders', PLUGIN_DOMAIN),
+            'all_items' => __('All Sliders', PLUGIN_DOMAIN),
+            'parent_item' => __('Parent Slider', PLUGIN_DOMAIN),
+            'parent_item_colon' => __('Parent Slider:', PLUGIN_DOMAIN),
+            'edit_item' => __('Edit Slider', PLUGIN_DOMAIN),
+            'update_item' => __('Update Slider', PLUGIN_DOMAIN),
+            'add_new_item' => __('Add New Slider', PLUGIN_DOMAIN),
+            'new_item_name' => __('New Slider Name', PLUGIN_DOMAIN),
+            'menu_name' => __('Sliders', PLUGIN_DOMAIN),
+        );
+
+        register_taxonomy('slider_category', array('rtslider'), array(
+            'hierarchical' => true,
+            'labels' => $labels,
+            'show_ui' => true,
+            'query_var' => true,
+            'public' => true,
+            'show_admin_column' => true,
+        ));
+    }
+
 }
