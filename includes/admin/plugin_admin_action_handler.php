@@ -23,12 +23,13 @@ if (!class_exists('rtslider_shortcode_handler_admin')):
             add_filter("manage_edit-slider_category_columns", array($this, 'theme_columns'));
             add_action('slider_category_edit_form_fields', array($this, 'slides_category_taxonomy_custom_fields'), 10, 2);
             add_action('edited_slider_category', array($this, 'save_taxonomy_custom_fields'), 10, 2);
-            add_action( "create_slider_category", array($this, 'add_taxonomy_custom_fields'),10,2);
+            add_action("create_slider_category", array($this, 'add_taxonomy_custom_fields'), 10, 2);
             add_action('add_meta_boxes', array($this, "add_rts_metabox"));
             add_action('save_post', array($this, "save_slider_images"));
             add_action("wp_ajax_rtslider_post_sortable_handle", array($this, 'rtslider_post_sortable_handle'));
             add_filter('parse_query', array($this, 'rtslider_privacy_list_handle'));
         }
+
         function manage_theme_columns($out, $column_name, $theme_id)
         {
             $theme = get_term($theme_id, 'slider_category');
@@ -60,7 +61,7 @@ if (!class_exists('rtslider_shortcode_handler_admin')):
         {
             $t_id = $tag->term_id; // Get the ID of the term you're editing
             $settings = get_option("taxonomy_term_$t_id");
-            $radio_val_array = array('1' => "Yes", '0' => "No");
+            $radio_val_array = array(true => "Yes", false => "No");
 
             include_once RTSLIDER_ADMIN_TEMPLATES . 'sliders_category_custom_fields.php';
         }
@@ -76,20 +77,23 @@ if (!class_exists('rtslider_shortcode_handler_admin')):
                         $term_meta[$key] = $_POST['term_meta'][$key];
                     }
                 }
+
                 update_option("taxonomy_term_$t_id", $term_meta);
             }
         }
 
-        function add_taxonomy_custom_fields($term_id,$tt_id){
+        function add_taxonomy_custom_fields($term_id, $tt_id)
+        {
 
             $category_object_meta = get_term_by('id', $term_id, RTSLIDER_CATEGORY);
             if (!is_wp_error($category_object_meta)) {
                 $term_slug = $category_object_meta->slug;
             }
-            $default_val=array('autoplay'=>1,'bullets'=>1,'arrows'=>1,'bullet_color'=>'#000','arrow_color'=>'#000','shortcode'=>"[rt_slider slider='$term_slug']");
+            $default_val = array('width' => 900, 'height' => 250, 'speed' => 600, 'autoplay' => 'true', 'bullets' => 'true', 'arrows' => 'true', 'bullet_color' => '#000', 'arrow_color' => '#000', 'shortcode' => "[rt_slider slider='$term_slug']");
             update_option("taxonomy_term_$term_id", $default_val);
 
         }
+
         function add_rts_metabox()
         {
             add_meta_box('rts_metabox', __("RT slider settings", PLUGIN_DOMAIN), array($this, "display_rts_metabox"), array('rtslider'), 'normal', 'high');

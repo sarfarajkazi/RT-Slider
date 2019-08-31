@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: RTSlider
-Plugin URI: #
+Plugin URI: http://sarfarajkazi.com
 Description: A demo on WordPress shortcode which includes a slider plugin with jQuery slick slider.
 Version: 1.0.0
 Author: Sarfaraj Kazi

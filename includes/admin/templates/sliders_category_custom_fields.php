@@ -7,7 +7,7 @@
             <?php esc_html_e("Width", PLUGIN_DOMAIN); ?>
         </th>
         <td>
-            <input type="number" name="width" value="<?php echo !empty($settings['width']) ? esc_attr($settings['width']) : 900; ?>">
+            <input type="number" name="term_meta[width]" value="<?php echo !empty($settings['width']) ? esc_attr($settings['width']) : 900; ?>">
         </td>
     </tr>
     <tr>
@@ -15,7 +15,7 @@
             <?php esc_html_e("Height", PLUGIN_DOMAIN); ?>
         </th>
         <td>
-            <input type="number" name="height" value="<?php echo !empty($settings['height']) ? esc_attr($settings['height']) : 250; ?>">
+            <input type="number" name="term_meta[height]" value="<?php echo !empty($settings['height']) ? esc_attr($settings['height']) : 250; ?>">
         </td>
     </tr>
     <tr>
@@ -24,7 +24,7 @@
         </th>
         <td>
             <?php $speed = !empty($settings['speed']) ? $settings['speed'] : 600; ?>
-            <input type="number" name="speed" value="<?php echo esc_attr($speed) ?>">
+            <input type="number" name="term_meta[speed]" value="<?php echo esc_attr($speed) ?>">
         </td>
     </tr>
     <tr>
@@ -34,12 +34,8 @@
         <td>
             <?php
             foreach ($radio_val_array as $key => $value) {
-                $default_checked='';
                 $selected = !empty($settings) && $settings['autoplay'] == $key ? "checked" : "";
-                if($value=='Yes' && $selected==''){
-                    $default_checked='checked';
-                }
-                echo sprintf("<input type='radio' ".$default_checked." name='term_meta[autoplay]' value='%s' %s> %s ", $key, $selected, $value);
+                echo sprintf("<input type='radio' name='term_meta[autoplay]' value='%s' %s> %s ", $key, $selected, $value);
             }
             ?>
         </td>
@@ -56,12 +52,8 @@
         <td>
             <?php
             foreach ($radio_val_array as $key => $value) {
-                $default_checked='';
-                if($value=='Yes' && $selected==''){
-                    $default_checked='checked';
-                }
                 $selected = !empty($settings) && $settings['bullets'] == $key ? "checked" : "";
-                echo sprintf("<input type='radio' ".$default_checked." name='term_meta[bullets]' value='%s' %s> %s ", $key, $selected, $value);
+                echo sprintf("<input type='radio' name='term_meta[bullets]' value='%s' %s> %s ", $key, $selected, $value);
             }
             ?>
         </td>
@@ -73,12 +65,8 @@
         <td>
             <?php
             foreach ($radio_val_array as $key => $value) {
-                $default_checked='';
-                if($value=='Yes' && $selected==''){
-                    $default_checked='checked';
-                }
                 $selected = !empty($settings) && $settings['arrows'] == $key ? "checked" : "";
-                echo sprintf("<input type='radio' ".$default_checked." name='term_meta[arrows]' value='%s' %s> %s ", $key, $selected, $value);
+                echo sprintf("<input type='radio'  name='term_meta[arrows]' value='%s' %s> %s ", $key, $selected, $value);
             }
             ?>
         </td>
