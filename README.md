@@ -31,6 +31,19 @@ To install this plugin, you will need to setup wordpress project in your compute
     3. Activate the plugin from the Plugin dashboard.
 ```
 
+### How to use it ?
+
+
+ - In Settings menu of wordpress dashboard area, you will find **RT Slider** submenu.
+ - Click on **RT Slider** .
+ - Create your slider by click on sliders (Add same as category).
+ - Set general and pagination settings and click on save slider.
+ - Now Create post and select your slider.
+ - Upload image as feature image.
+ - You can reorder post according to your choice.
+ - To display this slider in any post/page, you just need to use **[rt_slideshow slider='category-slug']** shortcode in your post/page.
+ 
+
 ### Author
 
 **[Sarfaraj Kazi](http://www.sarfarajkazi.com)** 
