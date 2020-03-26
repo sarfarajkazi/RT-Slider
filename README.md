@@ -46,7 +46,7 @@ To install this plugin, you will need to setup wordpress project in your compute
 
 ### Author
 
-**[Sarfaraj Kazi](http://www.sarfarajkazi.com)** 
+**Sarfaraj Kazi** 
 
 > **Social Presence**
 
