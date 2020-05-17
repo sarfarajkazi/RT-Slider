@@ -1,13 +1,15 @@
 <?php
+
 /*
-Plugin Name: RTSlider
-Plugin URI: http://sarfarajkazi.com
-Description: A demo on WordPress shortcode which includes a slider plugin with jQuery slick slider.
-Version: 1.0.0
-Author: Sarfaraj Kazi
-Author URI: http://sarfarajkazi.com
-License: GPL2
-*/
+  Plugin Name: RTSlider
+  Plugin URI: http://sarfarajkazi.com
+  Description: A demo on WordPress shortcode which includes a slider plugin with jQuery slick slider.
+  Version: 1.0.0
+  Author: Sarfaraj Kazi
+  Author URI: http://sarfarajkazi.com
+  License: GPL2
+  Text Domain: rtslider_domain
+ */
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
@@ -20,7 +22,7 @@ if (!defined('RTSLIDER_PLUGIN_FILE')) {
 
 // Include the main RTSLIDER class.
 if (!class_exists('RTSLIDER')) {
-    include_once dirname(__FILE__) . '/includes/plugin_class_file.php';
+    include_once dirname(__FILE__) . '/includes/class-rtslider-main.php';
 }
 
 /**
@@ -31,26 +33,8 @@ if (!class_exists('RTSLIDER')) {
  * @return RTSLIDER
  * @since 1.0.0
  */
-function RT()
-{
+function RT() {
     return RTSLIDER::rtslider_instance();
 }
-$GLOBALS['RTSLIDER'] = RT();
 
-function pr($data = false, $flag = false, $display = false)
-{
-    if (empty($display)) {
-        echo "<pre class='direct_display'>";
-        if ($flag == 1) {
-            print_r($data);
-            die;
-        } else {
-            print_r($data);
-        }
-        echo "</pre>";
-    } else {
-        echo "<div style='display:none' class='direct_display'><pre>";
-        print_r($data);
-        echo "</pre></div>";
-    }
-}
+$GLOBALS['RTSLIDER'] = RT();

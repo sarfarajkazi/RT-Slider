@@ -1,26 +1,31 @@
+<?php
+$t_id = $tag->term_id; // Get the ID of the term you're editing
+$settings = get_option("taxonomy_term_$t_id");
+$radio_val_array = array(true => "Yes", false => "No");
+?>
 <table class="form-table" id="tbl_general_setting">
     <tr class="section_title">
-        <td colspan="2"><?php esc_html_e("General settings", PLUGIN_DOMAIN); ?></td>
+        <td colspan="2"><?php esc_html_e("General settings", 'rtslider_domain'); ?></td>
     </tr>
     <tr>
         <th>
-            <?php esc_html_e("Width", PLUGIN_DOMAIN); ?>
+            <?php esc_html_e("Width", 'rtslider_domain'); ?>
         </th>
         <td>
-            <input type="number" name="term_meta[width]" value="<?php echo !empty($settings['width']) ? esc_attr($settings['width']) : 900; ?>">
+            <input type="number" name="term_meta[width]" value="<?php echo!empty($settings['width']) ? esc_attr($settings['width']) : 900; ?>">
         </td>
     </tr>
     <tr>
         <th>
-            <?php esc_html_e("Height", PLUGIN_DOMAIN); ?>
+            <?php esc_html_e("Height", 'rtslider_domain'); ?>
         </th>
         <td>
-            <input type="number" name="term_meta[height]" value="<?php echo !empty($settings['height']) ? esc_attr($settings['height']) : 250; ?>">
+            <input type="number" name="term_meta[height]" value="<?php echo!empty($settings['height']) ? esc_attr($settings['height']) : 250; ?>">
         </td>
     </tr>
     <tr>
         <th>
-            <?php esc_html_e("Speed", PLUGIN_DOMAIN); ?>
+            <?php esc_html_e("Speed", 'rtslider_domain'); ?>
         </th>
         <td>
             <?php $speed = !empty($settings['speed']) ? $settings['speed'] : 600; ?>
@@ -29,7 +34,7 @@
     </tr>
     <tr>
         <th>
-            <?php esc_html_e("Auto Play", PLUGIN_DOMAIN); ?>
+            <?php esc_html_e("Auto Play", 'rtslider_domain'); ?>
         </th>
         <td>
             <?php
@@ -43,11 +48,11 @@
 </table>
 <table class="form-table" id="tbl_nav_settings">
     <tr class="section_title">
-        <td colspan="2"><?php esc_html_e("Navigation and pagination settings", PLUGIN_DOMAIN); ?></td>
+        <td colspan="2"><?php esc_html_e("Navigation and pagination settings", 'rtslider_domain'); ?></td>
     </tr>
     <tr>
         <th>
-            <?php esc_html_e("Bullets", PLUGIN_DOMAIN); ?>
+            <?php esc_html_e("Bullets", 'rtslider_domain'); ?>
         </th>
         <td>
             <?php
@@ -60,7 +65,7 @@
     </tr>
     <tr>
         <th>
-            <?php esc_html_e("Arrows", PLUGIN_DOMAIN); ?>
+            <?php esc_html_e("Arrows", 'rtslider_domain'); ?>
         </th>
         <td>
             <?php
@@ -74,7 +79,7 @@
 
     <tr>
         <th>
-            <?php esc_html_e("Bullet Color", PLUGIN_DOMAIN); ?>
+            <?php esc_html_e("Bullet Color", 'rtslider_domain'); ?>
         </th>
         <td>
             <input type="text" name="term_meta[bullet_color]" class="colors" value="<?php echo esc_attr(!empty($settings['bullet_color']) ? $settings['bullet_color'] : "#000") ?>">
@@ -82,7 +87,7 @@
     </tr>
     <tr>
         <th>
-            <?php esc_html_e("Arrow Color", PLUGIN_DOMAIN); ?>
+            <?php esc_html_e("Arrow Color", 'rtslider_domain'); ?>
         </th>
         <td>
             <input type="text" name="term_meta[arrow_color]" class="colors" value="<?php echo esc_attr(!empty($settings['arrow_color']) ? $settings['arrow_color'] : "#000") ?>">
@@ -93,13 +98,16 @@
 <table class="form-table" id="tbl_category_settings">
     <tr class="form-field">
         <th scope="row" valign="top">
-            <label for="shortcode"><?php _e('Slider shortcode', PLUGIN_DOMAIN); ?></label>
+            <label for="shortcode"><?php _e('Slider shortcode', 'rtslider_domain'); ?></label>
         </th>
         <td>
             <input type="text" name="term_meta[shortcode]" id="term_meta[shortcode]" size="50"
                    style="width:100%;"
                    value="<?php echo $tag->slug ? "[rt_slider slider='" . $tag->slug . "']" : ""; ?>" readonly><br/>
-            <span class="description"><?php _e('Use this shortcode to insert it on anywhere', PLUGIN_DOMAIN); ?></span>
+            <span class="description"><?php _e('Use this shortcode to insert it on anywhere', 'rtslider_domain'); ?></span>
         </td>
     </tr>
 </table>
+<?php
+wp_nonce_field('rtslider_cat_save', 'rtslider_cat_edit');
+?>
