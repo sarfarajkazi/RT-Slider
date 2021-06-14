@@ -1,9 +1,7 @@
 <?php
-
 if (!defined('ABSPATH')) {
     exit;
 }
-
 /**
  * Handle all Shortcode Requests
  * @class rtslider_shortcode_handler
@@ -11,14 +9,12 @@ if (!defined('ABSPATH')) {
  * @author Sarfaraj Kazi
  */
 class rtslider_shortcode_handler {
-
     /**
      * Constructor.
      */
     public function __construct() {
         add_shortcode('rt_slider', array($this, 'rt_slider_callback'));
     }
-
     /**
      * Display rt_slider shortcode callback
      *
@@ -40,9 +36,11 @@ class rtslider_shortcode_handler {
                 $term_id = $category_object_meta->term_id;
             }
             if ($term_id) {
-                $term_metas = get_option("taxonomy_term_$term_id");
+                $term_metas=get_term_meta($term_id,'terms_slider_setting',true);
+	            if(is_wp_error($term_metas) || !is_array($term_metas)){
+		            $term_metas=array();
+	            }
             }
-
             $args = array(
                 'post_type' => RTSLIDER_POST_TYPE,
                 'posts_per_page' => -1,
@@ -57,7 +55,8 @@ class rtslider_shortcode_handler {
             $query = new WP_Query($args);
             if ($query->have_posts()) {
                 unset($term_metas['shortcode']);
-                $slick_settings = json_encode($term_metas);
+                $slick_settings_json = json_encode($term_metas);
+                $slick_settings=esc_attr($slick_settings_json);
                 $html .= "<div id='slick_settings' data-settings='$slick_settings'></div>";
                 $html .= "<div class='slick_slider'>";
                 foreach ($query->posts as $single_post) {
@@ -65,7 +64,7 @@ class rtslider_shortcode_handler {
                     extract($post_settings);
                     $img_src = wp_get_attachment_url(get_post_thumbnail_id($single_post->ID));
                     $html .= "<div class='rt_image'>";
-                    $html .= sprintf("<img src='%s'/>", $img_src);
+                    $html .= sprintf('<img src="%s"/>', $img_src);
                     if ($show_title) {
                         $html .= sprintf("<span class='slider-text'>%s</span>", $single_post->post_title);
                     }
@@ -79,7 +78,5 @@ class rtslider_shortcode_handler {
             return $html;
         }
     }
-
 }
-
 return new rtslider_shortcode_handler();

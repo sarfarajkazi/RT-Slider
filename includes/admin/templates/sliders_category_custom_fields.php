@@ -1,6 +1,9 @@
 <?php
 $t_id = $tag->term_id; // Get the ID of the term you're editing
-$settings = get_option("taxonomy_term_$t_id");
+$settings=get_term_meta($tag->term_id,'terms_slider_setting',true);
+if(is_wp_error($settings)){
+    $settings=array();
+}
 $radio_val_array = array(true => "Yes", false => "No");
 ?>
 <table class="form-table" id="tbl_general_setting">

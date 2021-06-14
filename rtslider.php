@@ -1,12 +1,11 @@
 <?php
-
 /*
   Plugin Name: RTSlider
-  Plugin URI: http://sarfarajkazi.com
+  Plugin URI: #
   Description: A demo on WordPress shortcode which includes a slider plugin with jQuery slick slider.
-  Version: 1.0.0
+  Version: 1.1
   Author: Sarfaraj Kazi
-  Author URI: http://sarfarajkazi.com
+  Author URI: #
   License: GPL2
   Text Domain: rtslider_domain
  */

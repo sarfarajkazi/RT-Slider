@@ -19,7 +19,7 @@ final class RTSLIDER {
     /**
      * The single instance of the class.
      *
-     * @since 2.1
+     * @since 1.0.0
      */
     protected static $_instance = null;
 
@@ -56,14 +56,14 @@ final class RTSLIDER {
         /*
          * plugin constants
          */
-        $this->rtslider_define("RTSLIDER_PLUGIN_URL", trailingslashit(plugin_dir_url(__DIR__)));
-        $this->rtslider_define("RTSLIDER_PLUGIN_PATH", trailingslashit(plugin_dir_path(__DIR__)));
-        $this->rtslider_define("RTSLIDER_ADMIN_TEMPLATES", trailingslashit(RTSLIDER_PLUGIN_PATH . 'includes/admin/templates/'));
+        $this->rtslider_define('RTSLIDER_PLUGIN_URL', trailingslashit(plugin_dir_url(__DIR__)));
+        $this->rtslider_define('RTSLIDER_PLUGIN_PATH', trailingslashit(plugin_dir_path(__DIR__)));
+        $this->rtslider_define('RTSLIDER_ADMIN_TEMPLATES', trailingslashit(RTSLIDER_PLUGIN_PATH . 'includes/admin/templates/'));
         /*
          * urls and site info
          */
-        $this->rtslider_define("RTSLIDER_ADMIN_AJAX_URL", admin_url('admin-ajax.php'));
-        $this->rtslider_define("RTSLIDER_SITE_URL", trailingslashit(site_url()));
+        $this->rtslider_define('RTSLIDER_ADMIN_AJAX_URL', admin_url('admin-ajax.php'));
+        $this->rtslider_define('RTSLIDER_SITE_URL', trailingslashit(site_url()));
         $this->rtslider_define('RTSLIDER_POST_TYPE', 'rtslider');
         $this->rtslider_define('RTSLIDER_CATEGORY', 'rtslider_category');
     }
@@ -123,12 +123,13 @@ final class RTSLIDER {
             ),
             'public' => false,
             'show_in_menu' => true,
-            'menu_position' => 4,
+            'menu_position' => 20,
             'show_ui' => true,
             'has_archive' => false,
             'hierarchical' => false,
-            'supports' => array('title', 'page-attributes', 'editor', 'thumbnail'),
-                )
+            'menu_icon' => 'dashicons-format-image',
+            'supports' => array('title', 'page-attributes', 'editor', 'thumbnail')
+	        )
         );
 
         $labels = array(
@@ -154,5 +155,7 @@ final class RTSLIDER {
             'show_admin_column' => true,
         ));
     }
+
+
 
 }

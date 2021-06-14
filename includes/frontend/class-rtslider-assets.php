@@ -1,5 +1,4 @@
 <?php
-
 if (!defined('ABSPATH')) {
     exit;
 }
@@ -41,6 +40,5 @@ if (!class_exists('rtslider_frontend_assets', false)) :
         }
 
     }
-
     endif;
 return new rtslider_frontend_assets();
